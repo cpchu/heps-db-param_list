@@ -39,6 +39,28 @@ public class ParameterAPI {
     
     /**
      * 
+     * @param paramName
+     * @return 
+     */
+    public Parameter getParameter(String paramName) {
+        Parameter param = null;
+        
+        return param;
+    }
+    
+    /**
+     * 
+     * @param paramName
+     * @return 
+     */
+    public List<Parameter> getParameterForAllDates(String paramName) {
+            List<Parameter> pList = null;
+            
+            return pList;        
+    }
+    
+    /**
+     * 
      * @param sys
      * @return
      */
