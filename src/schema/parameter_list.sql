@@ -107,7 +107,6 @@ CREATE TABLE IF NOT EXISTS `Parameter_List`.`Parameter` (
   `Name` VARCHAR(45) NULL,
   `Unit_id` INT NULL,
   `Definition` VARCHAR(45) NULL,
-  `Date_modified` DATE NULL,
   `Reference_id` INT NULL,
   PRIMARY KEY (`Id`),
   INDEX `fk_unit_id_idx` (`Unit_id` ASC),
