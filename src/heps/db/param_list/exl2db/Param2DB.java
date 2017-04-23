@@ -20,10 +20,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class Param2DB {
     public static void instDB(Workbook wb, String sheetName, String created_by, Date create_date) {
         ArrayList paramList = ReadSheet.getParamList(wb, sheetName);
+        ArrayList dbLabel = ReadSheet.getRowLabels();
         for (int i = 0; i < paramList.size(); i++) {
             Parameter p = null;
             ArrayList paramMap = (ArrayList) paramList.get(i);
-
 //            ArrayList rowClsList = (ArrayList) encapDataList.get(i);
 //            Parameter beamParameter = new ParameterAPI().setBeamParameter(e, model, particleType, 0);
 //            Iterator it = rowClsList.iterator();

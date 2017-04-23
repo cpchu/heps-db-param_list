@@ -18,6 +18,8 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class ReadSheet {
    
+    static ArrayList rowLabels = new ArrayList();
+    
     public static ArrayList getParamList(Workbook wb, String sheetName) {
         if (wb == null) {
             System.out.println("Error!");
@@ -27,13 +29,19 @@ public class ReadSheet {
             for (Iterator<Row> rit = sheet.rowIterator(); rit.hasNext();) {
                 Row row = (Row) rit.next();
                 ArrayList oneRow = new ArrayList();
-                for (Iterator<Cell> cit = row.iterator(); cit.hasNext();) {
-                    Cell cell = cit.next();
+                boolean labelRow = false;
+                for (Cell cell : row) {
                     Object o = "";
+                    String label = null;
                     switch (cell.getCellType()) {
-
                         case Cell.CELL_TYPE_STRING:
                             o = cell.getStringCellValue();
+                            if (o.equals("System")||o.equals("系统")) {
+                                labelRow = true;
+                                if (o.equals("System")) {
+                                    label = (String) o;
+                                }
+                            }
                             break;
                         case Cell.CELL_TYPE_NUMERIC:
                             o = cell.getNumericCellValue();
@@ -52,12 +60,20 @@ public class ReadSheet {
                             break;
                     }               
                     oneRow.add(o);
+                    if (labelRow) {
+                        rowLabels.add(label);
+                    }
                 }
-                dataList.add(oneRow);
+                if(!labelRow) {
+                    dataList.add(oneRow);
+                }
             }
             return dataList;
         }
         return null;
     }
     
+    public static ArrayList getRowLabels(){
+        return rowLabels;
+    }
 }
