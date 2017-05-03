@@ -40,7 +40,7 @@ public class HepsDbParam_list {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        HepsDbParam_list.exl2DB("C:\\work\\heps_data\\parameter_20170131.xls");
+        HepsDbParam_list.exl2DB("C:\\work\\heps_data\\parameter_20170131a.xls");
     }
 
 }
