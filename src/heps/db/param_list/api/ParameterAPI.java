@@ -30,6 +30,7 @@ public class ParameterAPI {
     
     private String sys = null;
     private String team = null;
+    private String team_manager = null;
     private String param_name = null;
     private String att = null;
     private String unit = null;
@@ -363,6 +364,22 @@ public class ParameterAPI {
      */
     public void setTeam(String team) {
         this.team = team;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getTeamManager() {
+        return team_manager;
+    }
+    
+    /**
+     * 
+     * @param team_manager 
+     */
+    public void setTeamManager(String team_manager) {
+        this.team_manager = team_manager;
     }
     
     /**
