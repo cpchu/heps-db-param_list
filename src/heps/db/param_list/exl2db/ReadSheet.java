@@ -4,7 +4,9 @@
  */
 package heps.db.param_list.exl2db;
 
+import heps.db.param_list.api.ParameterAPI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,6 +21,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ReadSheet {
    
     static ArrayList rowLabels = new ArrayList();
+    HashMap<String, ParameterAPI> paramList = new HashMap<String, ParameterAPI>();
     
     public static ArrayList getParamList(Workbook wb, String sheetName) {
         if (wb == null) {
