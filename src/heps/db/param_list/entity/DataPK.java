@@ -16,6 +16,10 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class DataPK implements Serializable {
+
+    @Basic(optional = false)
+    @Column(name = "data_id")
+    private int dataId;
     @Basic(optional = false)
     @Column(name = "Team_id")
     private int teamid;
@@ -32,11 +36,20 @@ public class DataPK implements Serializable {
     public DataPK() {
     }
 
-    public DataPK(int teamid, int systemid, int attributeid, int parameterid) {
+    public DataPK(int dataId, int teamid, int systemid, int attributeid, int parameterid) {
+        this.dataId = dataId;
         this.teamid = teamid;
         this.systemid = systemid;
         this.attributeid = attributeid;
         this.parameterid = parameterid;
+    }
+
+    public int getDataId() {
+        return dataId;
+    }
+
+    public void setDataId(int dataId) {
+        this.dataId = dataId;
     }
 
     public int getTeamid() {
@@ -74,6 +87,7 @@ public class DataPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) dataId;
         hash += (int) teamid;
         hash += (int) systemid;
         hash += (int) attributeid;
@@ -88,6 +102,9 @@ public class DataPK implements Serializable {
             return false;
         }
         DataPK other = (DataPK) object;
+        if (this.dataId != other.dataId) {
+            return false;
+        }
         if (this.teamid != other.teamid) {
             return false;
         }
@@ -105,7 +122,7 @@ public class DataPK implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.param_list.entity.DataPK[ teamid=" + teamid + ", systemid=" + systemid + ", attributeid=" + attributeid + ", parameterid=" + parameterid + " ]";
+        return "heps.db.param_list.entity.DataPK[ dataId=" + dataId + ", teamid=" + teamid + ", systemid=" + systemid + ", attributeid=" + attributeid + ", parameterid=" + parameterid + " ]";
     }
     
 }

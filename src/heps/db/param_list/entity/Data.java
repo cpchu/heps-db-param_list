@@ -27,16 +27,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "data")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Data.findAll", query = "SELECT d FROM Data d"),
-    @NamedQuery(name = "Data.findByTeamid", query = "SELECT d FROM Data d WHERE d.dataPK.teamid = :teamid"),
-    @NamedQuery(name = "Data.findBySystemid", query = "SELECT d FROM Data d WHERE d.dataPK.systemid = :systemid"),
-    @NamedQuery(name = "Data.findByAttributeid", query = "SELECT d FROM Data d WHERE d.dataPK.attributeid = :attributeid"),
-    @NamedQuery(name = "Data.findByParameterid", query = "SELECT d FROM Data d WHERE d.dataPK.parameterid = :parameterid"),
-    @NamedQuery(name = "Data.findByValue", query = "SELECT d FROM Data d WHERE d.value = :value"),
-    @NamedQuery(name = "Data.findByStatus", query = "SELECT d FROM Data d WHERE d.status = :status"),
-    @NamedQuery(name = "Data.findByDatemodified", query = "SELECT d FROM Data d WHERE d.datemodified = :datemodified"),
-    @NamedQuery(name = "Data.findByComment", query = "SELECT d FROM Data d WHERE d.comment = :comment")})
+    @NamedQuery(name = "Data.findAll", query = "SELECT d FROM Data d")
+    , @NamedQuery(name = "Data.findByDataId", query = "SELECT d FROM Data d WHERE d.dataPK.dataId = :dataId")
+    , @NamedQuery(name = "Data.findByTeamid", query = "SELECT d FROM Data d WHERE d.dataPK.teamid = :teamid")
+    , @NamedQuery(name = "Data.findBySystemid", query = "SELECT d FROM Data d WHERE d.dataPK.systemid = :systemid")
+    , @NamedQuery(name = "Data.findByAttributeid", query = "SELECT d FROM Data d WHERE d.dataPK.attributeid = :attributeid")
+    , @NamedQuery(name = "Data.findByParameterid", query = "SELECT d FROM Data d WHERE d.dataPK.parameterid = :parameterid")
+    , @NamedQuery(name = "Data.findByValue", query = "SELECT d FROM Data d WHERE d.value = :value")
+    , @NamedQuery(name = "Data.findByStatus", query = "SELECT d FROM Data d WHERE d.status = :status")
+    , @NamedQuery(name = "Data.findByDatemodified", query = "SELECT d FROM Data d WHERE d.datemodified = :datemodified")
+    , @NamedQuery(name = "Data.findByComment", query = "SELECT d FROM Data d WHERE d.comment = :comment")})
 public class Data implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected DataPK dataPK;
@@ -69,8 +71,8 @@ public class Data implements Serializable {
         this.dataPK = dataPK;
     }
 
-    public Data(int teamid, int systemid, int attributeid, int parameterid) {
-        this.dataPK = new DataPK(teamid, systemid, attributeid, parameterid);
+    public Data(int dataId, int teamid, int systemid, int attributeid, int parameterid) {
+        this.dataPK = new DataPK(dataId, teamid, systemid, attributeid, parameterid);
     }
 
     public DataPK getDataPK() {
