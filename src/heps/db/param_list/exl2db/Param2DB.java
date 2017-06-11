@@ -31,9 +31,9 @@ public class Param2DB {
             // If not, create a new parameter 
             DataAPI dapi = new DataAPI();
             if (!dapi.getDataFor(p.getSystem(), p.getTeam(), p.getParameterName(), p.getAttribute()).isEmpty()) {
-                
+                // dapi.updateData(p);
             } else {
-                
+                // p.saveNewParameter();
             }
             
         }
