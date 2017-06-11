@@ -5,12 +5,10 @@
  */
 package heps.db.param_list.exl2db;
 
+import heps.db.param_list.api.DataAPI;
 import heps.db.param_list.api.ParameterAPI;
-import heps.db.param_list.entity.Parameter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
@@ -28,17 +26,16 @@ public class Param2DB {
 //            ArrayList paramMap = (ArrayList) paramList.get(i);
             
             System.out.println(p);
+            // First check if the parameter already exists in the DB. 
+            // If it does exist, only create a new data for the existing parameter.
+            // If not, create a new parameter 
+            DataAPI dapi = new DataAPI();
+            if (!dapi.getDataFor(p.getSystem(), p.getTeam(), p.getParameterName(), p.getAttribute()).isEmpty()) {
+                
+            } else {
+                
+            }
             
-            
-//            ArrayList rowClsList = (ArrayList) encapDataList.get(i);
-//            Parameter beamParameter = new ParameterAPI().setBeamParameter(e, model, particleType, 0);
-//            Iterator it = rowClsList.iterator();
-//            while (it.hasNext()) {
-//                BeamCell cellProp = (BeamCell) it.next();
-//                if ("beam_parameter_prop".equals(cellProp.getTableName())) {
-//                    new BeamParameterPropAPI().setBeamParameterProp(beamParameter, cellProp.getCategory(), cellProp.getName(), cellProp.getDatatype(), cellProp.getValue(), null);
-//                }
-//            }
         }
 
     }

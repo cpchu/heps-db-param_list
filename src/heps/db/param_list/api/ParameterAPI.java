@@ -9,6 +9,7 @@ import heps.db.param_list.entity.Manager;
 import heps.db.param_list.entity.Parameter;
 import heps.db.param_list.entity.System;
 import heps.db.param_list.entity.Team;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -59,10 +60,10 @@ public class ParameterAPI {
      * @param paramName
      * @return 
      */
-    public Parameter getParameter(String paramName) {
-        Parameter param = null;
+    public ArrayList getParameters(String paramName) {
+        ArrayList<Parameter> params = null;
         
-        return param;
+        return params;
     }
     
     /**
