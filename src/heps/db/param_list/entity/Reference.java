@@ -20,20 +20,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author C.M.P
+ * @author Paul
  */
 @Entity
 @Table(name = "reference")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Reference.findAll", query = "SELECT r FROM Reference r"),
-    @NamedQuery(name = "Reference.findById", query = "SELECT r FROM Reference r WHERE r.id = :id"),
-    @NamedQuery(name = "Reference.findByTitle", query = "SELECT r FROM Reference r WHERE r.title = :title"),
-    @NamedQuery(name = "Reference.findByAuthor", query = "SELECT r FROM Reference r WHERE r.author = :author"),
-    @NamedQuery(name = "Reference.findByPublication", query = "SELECT r FROM Reference r WHERE r.publication = :publication"),
-    @NamedQuery(name = "Reference.findByUrl", query = "SELECT r FROM Reference r WHERE r.url = :url"),
-    @NamedQuery(name = "Reference.findByKeywords", query = "SELECT r FROM Reference r WHERE r.keywords = :keywords")})
+    @NamedQuery(name = "Reference.findAll", query = "SELECT r FROM Reference r")
+    , @NamedQuery(name = "Reference.findById", query = "SELECT r FROM Reference r WHERE r.id = :id")
+    , @NamedQuery(name = "Reference.findByTitle", query = "SELECT r FROM Reference r WHERE r.title = :title")
+    , @NamedQuery(name = "Reference.findByAuthor", query = "SELECT r FROM Reference r WHERE r.author = :author")
+    , @NamedQuery(name = "Reference.findByPublication", query = "SELECT r FROM Reference r WHERE r.publication = :publication")
+    , @NamedQuery(name = "Reference.findByUrl", query = "SELECT r FROM Reference r WHERE r.url = :url")
+    , @NamedQuery(name = "Reference.findByKeywords", query = "SELECT r FROM Reference r WHERE r.keywords = :keywords")})
 public class Reference implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
