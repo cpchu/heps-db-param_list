@@ -9,34 +9,25 @@ import heps.db.param_list.entity.Manager;
 import heps.db.param_list.entity.Parameter;
 import heps.db.param_list.entity.System;
 import heps.db.param_list.entity.Team;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
 /**
  *
  * @author C.M.P
  */
 public class ParameterAPI {
-    @PersistenceUnit
-    static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("heps-db-param_listPU");
-    static final EntityManager em = emf.createEntityManager();
-
-    @PersistenceContext     
     
     private String sys = null;
     private String team = null;
     private String team_manager = null;
+    private String parent_team = null;
+    private String parent_sys = null;            
     private String param_name = null;
     private String att = null;
     private String unit = null;
     private String data = null;
-    private Date date = new Date();
+    private Date date = null;
     private String def = null;
     private String ref_title = null;
     private String ref_author = null;
@@ -60,10 +51,10 @@ public class ParameterAPI {
      * @param paramName
      * @return 
      */
-    public ArrayList getParameters(String paramName) {
-        ArrayList<Parameter> params = null;
+    public Parameter getParameter(String paramName) {
+        Parameter param = null;
         
-        return params;
+        return param;
     }
     
     /**
@@ -174,11 +165,101 @@ public class ParameterAPI {
     public void setParameterByName(String paramName) {
         
     }
+
     
+    
+    public String getSys() {
+        return sys;
+    }
+
+    public void setSys(String sys) {
+        this.sys = sys;
+    }
+
+    public String getTeam_manager() {
+        return team_manager;
+    }
+
+    public void setTeam_manager(String team_manager) {
+        this.team_manager = team_manager;
+    }
+
+    public String getParent_team() {
+        return parent_team;
+    }
+
+    public void setParent_team(String parent_team) {
+        this.parent_team = parent_team;
+    }
+
+    public String getParent_sys() {
+        return parent_sys;
+    }
+
+    public void setParent_sys(String parent_sys) {
+        this.parent_sys = parent_sys;
+    }
+
+    public String getParam_name() {
+        return param_name;
+    }
+
+    public void setParam_name(String param_name) {
+        this.param_name = param_name;
+    }
+
+    public String getAtt() {
+        return att;
+    }
+
+    public void setAtt(String att) {
+        this.att = att;
+    }
+
+    public String getDef() {
+        return def;
+    }
+
+    public void setDef(String def) {
+        this.def = def;
+    }
+
+    public String getRef_title() {
+        return ref_title;
+    }
+
+    public void setRef_title(String ref_title) {
+        this.ref_title = ref_title;
+    }
+
+    public String getRef_author() {
+        return ref_author;
+    }
+
+    public void setRef_author(String ref_author) {
+        this.ref_author = ref_author;
+    }
+
+    public String getRef_publication() {
+        return ref_publication;
+    }
+
+    public void setRef_publication(String ref_publication) {
+        this.ref_publication = ref_publication;
+    }
+
+    public String getRef_url() {
+        return ref_url;
+    }
+
     /**
-     * 
+     *
      * @return 
      */
+    public void setRef_url(String ref_url) {
+        this.ref_url = ref_url;
+    }
+
     public String getAttribute() {
         return att;
     }
@@ -398,4 +479,11 @@ public class ParameterAPI {
     public void setUnit(String unit) {
         this.unit = unit;
     }
+
+    @Override
+    public String toString() {
+        return "ParameterAPI{" + "sys=" + sys + ", team=" + team + ", team_manager=" + team_manager + ", parent_team=" + parent_team + ", parent_sys=" + parent_sys + ", param_name=" + param_name + ", att=" + att + ", unit=" + unit + ", data=" + data + ", date=" + date + ", def=" + def + ", ref_title=" + ref_title + ", ref_author=" + ref_author + ", ref_publication=" + ref_publication + ", ref_url=" + ref_url + ", keyword=" + keyword + '}';
+    }
+    
+    
 }
