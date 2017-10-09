@@ -148,7 +148,7 @@ public class DataAPI {
             // System.out.println("主键参数名查找不到，将重新创建");
             Parameter param = new Parameter();
             param.setName(p.getParam_name().replaceAll("\\s*", ""));
-            param.setDatemodified(p.getDate());
+//            param.setDatemodified(p.getDate());
             param.setDefinition(p.getDef());
             try {
                 Unit unit = em.createQuery("SELECT u FROM Unit u WHERE u.name = :name", Unit.class).setParameter("name", p.getUnit()).getSingleResult();

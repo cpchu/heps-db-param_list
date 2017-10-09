@@ -8,7 +8,10 @@ package heps.db.param_list;
 import heps.db.param_list.entity.Parameter;
 import heps.db.param_list.exl2db.Param2DB;
 import heps.db.param_list.exl2db.ReadExl;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -30,7 +33,11 @@ public class HepsDbParam_list {
             String created_by = si.getAuthor();
             Date create_date = si.getLastSaveDateTime();
 
-            Param2DB.instDB(wb, "Accelerator", created_by, create_date);
+            try {
+                Param2DB.instDB(wb, "Accelerator", created_by, create_date);
+            } catch (ParseException ex) {
+                Logger.getLogger(HepsDbParam_list.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     }

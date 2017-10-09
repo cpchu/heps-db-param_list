@@ -24,7 +24,7 @@ public class HepsDbParam_list1 {
         ReadExl r = new ReadExl();
         Workbook wb = ReadExl.getWorkbook(filePath);
         Param2DB param2DB = new Param2DB();
-        String param2DBResult = "";
+        String param2DBResult="";
                 
         String file_type = filePath.substring(filePath.lastIndexOf(".") + 1);
         System.out.println("文件类型："+ file_type);
@@ -38,7 +38,7 @@ public class HepsDbParam_list1 {
             String created_by = si.getAuthor();
             Date create_date = si.getLastSaveDateTime();
 
-            param2DBResult = Param2DB.instDB(wb, file_type, created_by, create_date);
+            Param2DB.instDB(wb, file_type, created_by, create_date);
             param2DBResult = Param2DB.instDB(wb, "Accelerator", created_by, create_date);
                        
 
