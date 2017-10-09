@@ -20,16 +20,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author C.M.P
+ * @author Paul
  */
 @Entity
 @Table(name = "manager")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Manager.findAll", query = "SELECT m FROM Manager m"),
-    @NamedQuery(name = "Manager.findById", query = "SELECT m FROM Manager m WHERE m.id = :id"),
-    @NamedQuery(name = "Manager.findByName", query = "SELECT m FROM Manager m WHERE m.name = :name")})
+    @NamedQuery(name = "Manager.findAll", query = "SELECT m FROM Manager m")
+    , @NamedQuery(name = "Manager.findById", query = "SELECT m FROM Manager m WHERE m.id = :id")
+    , @NamedQuery(name = "Manager.findByName", query = "SELECT m FROM Manager m WHERE m.name = :name")})
 public class Manager implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

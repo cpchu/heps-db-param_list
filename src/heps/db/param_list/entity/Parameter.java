@@ -7,7 +7,6 @@ package heps.db.param_list.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,25 +18,23 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author C.M.P
+ * @author Paul
  */
 @Entity
 @Table(name = "parameter")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Parameter.findAll", query = "SELECT p FROM Parameter p"),
-    @NamedQuery(name = "Parameter.findById", query = "SELECT p FROM Parameter p WHERE p.id = :id"),
-    @NamedQuery(name = "Parameter.findByName", query = "SELECT p FROM Parameter p WHERE p.name = :name"),
-    @NamedQuery(name = "Parameter.findByDefinition", query = "SELECT p FROM Parameter p WHERE p.definition = :definition"),
-    @NamedQuery(name = "Parameter.findByDatemodified", query = "SELECT p FROM Parameter p WHERE p.datemodified = :datemodified")})
+    @NamedQuery(name = "Parameter.findAll", query = "SELECT p FROM Parameter p")
+    , @NamedQuery(name = "Parameter.findById", query = "SELECT p FROM Parameter p WHERE p.id = :id")
+    , @NamedQuery(name = "Parameter.findByName", query = "SELECT p FROM Parameter p WHERE p.name = :name")
+    , @NamedQuery(name = "Parameter.findByDefinition", query = "SELECT p FROM Parameter p WHERE p.definition = :definition")})
 public class Parameter implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -47,9 +44,6 @@ public class Parameter implements Serializable {
     private String name;
     @Column(name = "Definition")
     private String definition;
-    @Column(name = "Date_modified")
-    @Temporal(TemporalType.DATE)
-    private Date datemodified;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parameter")
     private Collection<Data> dataCollection;
     @JoinColumn(name = "Reference_id", referencedColumnName = "Id")
@@ -88,14 +82,6 @@ public class Parameter implements Serializable {
 
     public void setDefinition(String definition) {
         this.definition = definition;
-    }
-
-    public Date getDatemodified() {
-        return datemodified;
-    }
-
-    public void setDatemodified(Date datemodified) {
-        this.datemodified = datemodified;
     }
 
     @XmlTransient
