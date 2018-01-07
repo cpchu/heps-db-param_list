@@ -6,24 +6,24 @@
 package heps.db.param_list.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "system")
@@ -31,23 +31,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "System.findAll", query = "SELECT s FROM System s")
     , @NamedQuery(name = "System.findById", query = "SELECT s FROM System s WHERE s.id = :id")
+    , @NamedQuery(name = "System.findByParentid", query = "SELECT s FROM System s WHERE s.parentid = :parentid")
     , @NamedQuery(name = "System.findByName", query = "SELECT s FROM System s WHERE s.name = :name")})
 public class System implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    @Column(name = "Parent_id")
+    private Integer parentid;
+    @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @OneToMany(mappedBy = "parentid")
-    private Collection<System> systemCollection;
-    @JoinColumn(name = "Parent_id", referencedColumnName = "Id")
-    @ManyToOne
-    private System parentid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "system")
-    private Collection<Data> dataCollection;
+    @OneToMany(mappedBy = "systemid")
+    private List<Data> dataList;
 
     public System() {
     }
@@ -64,6 +64,14 @@ public class System implements Serializable {
         this.id = id;
     }
 
+    public Integer getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
+
     public String getName() {
         return name;
     }
@@ -73,29 +81,12 @@ public class System implements Serializable {
     }
 
     @XmlTransient
-    public Collection<System> getSystemCollection() {
-        return systemCollection;
+    public List<Data> getDataList() {
+        return dataList;
     }
 
-    public void setSystemCollection(Collection<System> systemCollection) {
-        this.systemCollection = systemCollection;
-    }
-
-    public System getParentid() {
-        return parentid;
-    }
-
-    public void setParentid(System parentid) {
-        this.parentid = parentid;
-    }
-
-    @XmlTransient
-    public Collection<Data> getDataCollection() {
-        return dataCollection;
-    }
-
-    public void setDataCollection(Collection<Data> dataCollection) {
-        this.dataCollection = dataCollection;
+    public void setDataList(List<Data> dataList) {
+        this.dataList = dataList;
     }
 
     @Override

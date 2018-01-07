@@ -7,9 +7,12 @@ package heps.db.param_list.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -17,70 +20,78 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "data")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Data.findAll", query = "SELECT d FROM Data d")
-    , @NamedQuery(name = "Data.findByDataId", query = "SELECT d FROM Data d WHERE d.dataPK.dataId = :dataId")
-    , @NamedQuery(name = "Data.findByTeamid", query = "SELECT d FROM Data d WHERE d.dataPK.teamid = :teamid")
-    , @NamedQuery(name = "Data.findBySystemid", query = "SELECT d FROM Data d WHERE d.dataPK.systemid = :systemid")
-    , @NamedQuery(name = "Data.findByAttributeid", query = "SELECT d FROM Data d WHERE d.dataPK.attributeid = :attributeid")
-    , @NamedQuery(name = "Data.findByParameterid", query = "SELECT d FROM Data d WHERE d.dataPK.parameterid = :parameterid")
+    , @NamedQuery(name = "Data.findById", query = "SELECT d FROM Data d WHERE d.id = :id")
     , @NamedQuery(name = "Data.findByValue", query = "SELECT d FROM Data d WHERE d.value = :value")
-    , @NamedQuery(name = "Data.findByStatus", query = "SELECT d FROM Data d WHERE d.status = :status")
     , @NamedQuery(name = "Data.findByDatemodified", query = "SELECT d FROM Data d WHERE d.datemodified = :datemodified")
-    , @NamedQuery(name = "Data.findByComment", query = "SELECT d FROM Data d WHERE d.comment = :comment")})
+    , @NamedQuery(name = "Data.findByComment", query = "SELECT d FROM Data d WHERE d.comment = :comment")
+    , @NamedQuery(name = "Data.findByStatus", query = "SELECT d FROM Data d WHERE d.status = :status")})
 public class Data implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected DataPK dataPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "Id")
+    private Integer id;
+    @Size(max = 200)
     @Column(name = "Value")
     private String value;
-    @Column(name = "Status")
-    private String status;
     @Column(name = "Date_modified")
     @Temporal(TemporalType.DATE)
     private Date datemodified;
+    @Size(max = 80)
     @Column(name = "Comment")
     private String comment;
-    @JoinColumn(name = "Attribute_id", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Attribute attribute;
-    @JoinColumn(name = "Parameter_id", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Parameter parameter;
-    @JoinColumn(name = "System_id", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private System system;
-    @JoinColumn(name = "Team_id", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Team team;
+    @Size(max = 45)
+    @Column(name = "Status")
+    private String status;
+    @JoinColumn(name = "Attribute_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Attribute attributeid;
+    @JoinColumn(name = "device_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Device deviceId;
+    @JoinColumn(name = "Parameter_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Parameter parameterid;
+    @JoinColumn(name = "Subsystem_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Subsystem subsystemid;
+    @JoinColumn(name = "System_id", referencedColumnName = "Id")
+    @ManyToOne
+    private System systemid;
+    @JoinColumn(name = "Team_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Team teamid;
+    @JoinColumn(name = "Version_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Version versionid;
 
     public Data() {
     }
 
-    public Data(DataPK dataPK) {
-        this.dataPK = dataPK;
+    public Data(Integer id) {
+        this.id = id;
     }
 
-    public Data(int dataId, int teamid, int systemid, int attributeid, int parameterid) {
-        this.dataPK = new DataPK(dataId, teamid, systemid, attributeid, parameterid);
+    public Integer getId() {
+        return id;
     }
 
-    public DataPK getDataPK() {
-        return dataPK;
-    }
-
-    public void setDataPK(DataPK dataPK) {
-        this.dataPK = dataPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getValue() {
@@ -89,14 +100,6 @@ public class Data implements Serializable {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Date getDatemodified() {
@@ -115,42 +118,74 @@ public class Data implements Serializable {
         this.comment = comment;
     }
 
-    public Attribute getAttribute() {
-        return attribute;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAttribute(Attribute attribute) {
-        this.attribute = attribute;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Parameter getParameter() {
-        return parameter;
+    public Attribute getAttributeid() {
+        return attributeid;
     }
 
-    public void setParameter(Parameter parameter) {
-        this.parameter = parameter;
+    public void setAttributeid(Attribute attributeid) {
+        this.attributeid = attributeid;
     }
 
-    public System getSystem() {
-        return system;
+    public Device getDeviceId() {
+        return deviceId;
     }
 
-    public void setSystem(System system) {
-        this.system = system;
+    public void setDeviceId(Device deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public Team getTeam() {
-        return team;
+    public Parameter getParameterid() {
+        return parameterid;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setParameterid(Parameter parameterid) {
+        this.parameterid = parameterid;
+    }
+
+    public Subsystem getSubsystemid() {
+        return subsystemid;
+    }
+
+    public void setSubsystemid(Subsystem subsystemid) {
+        this.subsystemid = subsystemid;
+    }
+
+    public System getSystemid() {
+        return systemid;
+    }
+
+    public void setSystemid(System systemid) {
+        this.systemid = systemid;
+    }
+
+    public Team getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(Team teamid) {
+        this.teamid = teamid;
+    }
+
+    public Version getVersionid() {
+        return versionid;
+    }
+
+    public void setVersionid(Version versionid) {
+        this.versionid = versionid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (dataPK != null ? dataPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -161,7 +196,7 @@ public class Data implements Serializable {
             return false;
         }
         Data other = (Data) object;
-        if ((this.dataPK == null && other.dataPK != null) || (this.dataPK != null && !this.dataPK.equals(other.dataPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -169,7 +204,7 @@ public class Data implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.param_list.entity.Data[ dataPK=" + dataPK + " ]";
+        return "heps.db.param_list.entity.Data[ id=" + id + " ]";
     }
     
 }

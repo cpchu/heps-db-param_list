@@ -6,11 +6,12 @@
 package heps.db.param_list.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,12 +19,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "team")
@@ -31,26 +33,26 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t")
     , @NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id")
+    , @NamedQuery(name = "Team.findByParentid", query = "SELECT t FROM Team t WHERE t.parentid = :parentid")
     , @NamedQuery(name = "Team.findByName", query = "SELECT t FROM Team t WHERE t.name = :name")})
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    @Column(name = "Parent_id")
+    private Integer parentid;
+    @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private Collection<Data> dataCollection;
+    @OneToMany(mappedBy = "teamid")
+    private List<Data> dataList;
     @JoinColumn(name = "Manager_id", referencedColumnName = "Id")
     @ManyToOne
     private Manager managerid;
-    @OneToMany(mappedBy = "parentid")
-    private Collection<Team> teamCollection;
-    @JoinColumn(name = "Parent_id", referencedColumnName = "Id")
-    @ManyToOne
-    private Team parentid;
 
     public Team() {
     }
@@ -67,6 +69,14 @@ public class Team implements Serializable {
         this.id = id;
     }
 
+    public Integer getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
+
     public String getName() {
         return name;
     }
@@ -76,12 +86,12 @@ public class Team implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Data> getDataCollection() {
-        return dataCollection;
+    public List<Data> getDataList() {
+        return dataList;
     }
 
-    public void setDataCollection(Collection<Data> dataCollection) {
-        this.dataCollection = dataCollection;
+    public void setDataList(List<Data> dataList) {
+        this.dataList = dataList;
     }
 
     public Manager getManagerid() {
@@ -90,23 +100,6 @@ public class Team implements Serializable {
 
     public void setManagerid(Manager managerid) {
         this.managerid = managerid;
-    }
-
-    @XmlTransient
-    public Collection<Team> getTeamCollection() {
-        return teamCollection;
-    }
-
-    public void setTeamCollection(Collection<Team> teamCollection) {
-        this.teamCollection = teamCollection;
-    }
-
-    public Team getParentid() {
-        return parentid;
-    }
-
-    public void setParentid(Team parentid) {
-        this.parentid = parentid;
     }
 
     @Override

@@ -6,21 +6,24 @@
 package heps.db.param_list.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "reference")
@@ -37,21 +40,27 @@ public class Reference implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    @Size(max = 45)
     @Column(name = "Title")
     private String title;
+    @Size(max = 45)
     @Column(name = "Author")
     private String author;
+    @Size(max = 45)
     @Column(name = "Publication")
     private String publication;
+    @Size(max = 45)
     @Column(name = "URL")
     private String url;
+    @Size(max = 45)
     @Column(name = "Keywords")
     private String keywords;
     @OneToMany(mappedBy = "referenceid")
-    private Collection<Parameter> parameterCollection;
+    private List<Parameter> parameterList;
 
     public Reference() {
     }
@@ -109,12 +118,12 @@ public class Reference implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Parameter> getParameterCollection() {
-        return parameterCollection;
+    public List<Parameter> getParameterList() {
+        return parameterList;
     }
 
-    public void setParameterCollection(Collection<Parameter> parameterCollection) {
-        this.parameterCollection = parameterCollection;
+    public void setParameterList(List<Parameter> parameterList) {
+        this.parameterList = parameterList;
     }
 
     @Override

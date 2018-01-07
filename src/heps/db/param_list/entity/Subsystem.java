@@ -26,13 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Lvhuihui
  */
 @Entity
-@Table(name = "unit")
+@Table(name = "subsystem")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Unit.findAll", query = "SELECT u FROM Unit u")
-    , @NamedQuery(name = "Unit.findById", query = "SELECT u FROM Unit u WHERE u.id = :id")
-    , @NamedQuery(name = "Unit.findByName", query = "SELECT u FROM Unit u WHERE u.name = :name")})
-public class Unit implements Serializable {
+    @NamedQuery(name = "Subsystem.findAll", query = "SELECT s FROM Subsystem s")
+    , @NamedQuery(name = "Subsystem.findById", query = "SELECT s FROM Subsystem s WHERE s.id = :id")
+    , @NamedQuery(name = "Subsystem.findByParentid", query = "SELECT s FROM Subsystem s WHERE s.parentid = :parentid")
+    , @NamedQuery(name = "Subsystem.findByName", query = "SELECT s FROM Subsystem s WHERE s.name = :name")})
+public class Subsystem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,16 +41,18 @@ public class Unit implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    @Column(name = "Parent_id")
+    private Integer parentid;
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @OneToMany(mappedBy = "unitid")
-    private List<Parameter> parameterList;
+    @OneToMany(mappedBy = "subsystemid")
+    private List<Data> dataList;
 
-    public Unit() {
+    public Subsystem() {
     }
 
-    public Unit(Integer id) {
+    public Subsystem(Integer id) {
         this.id = id;
     }
 
@@ -61,6 +64,14 @@ public class Unit implements Serializable {
         this.id = id;
     }
 
+    public Integer getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
+
     public String getName() {
         return name;
     }
@@ -70,12 +81,12 @@ public class Unit implements Serializable {
     }
 
     @XmlTransient
-    public List<Parameter> getParameterList() {
-        return parameterList;
+    public List<Data> getDataList() {
+        return dataList;
     }
 
-    public void setParameterList(List<Parameter> parameterList) {
-        this.parameterList = parameterList;
+    public void setDataList(List<Data> dataList) {
+        this.dataList = dataList;
     }
 
     @Override
@@ -88,10 +99,10 @@ public class Unit implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Unit)) {
+        if (!(object instanceof Subsystem)) {
             return false;
         }
-        Unit other = (Unit) object;
+        Subsystem other = (Subsystem) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -100,7 +111,7 @@ public class Unit implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.param_list.entity.Unit[ id=" + id + " ]";
+        return "heps.db.param_list.entity.Subsystem[ id=" + id + " ]";
     }
     
 }

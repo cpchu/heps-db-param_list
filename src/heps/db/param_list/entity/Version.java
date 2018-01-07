@@ -6,7 +6,6 @@
 package heps.db.param_list.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,14 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -31,15 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Lvhuihui
  */
 @Entity
-@Table(name = "parameter")
+@Table(name = "version")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Parameter.findAll", query = "SELECT p FROM Parameter p")
-    , @NamedQuery(name = "Parameter.findById", query = "SELECT p FROM Parameter p WHERE p.id = :id")
-    , @NamedQuery(name = "Parameter.findByName", query = "SELECT p FROM Parameter p WHERE p.name = :name")
-    , @NamedQuery(name = "Parameter.findByDefinition", query = "SELECT p FROM Parameter p WHERE p.definition = :definition")
-    , @NamedQuery(name = "Parameter.findByDatemodified", query = "SELECT p FROM Parameter p WHERE p.datemodified = :datemodified")})
-public class Parameter implements Serializable {
+    @NamedQuery(name = "Version.findAll", query = "SELECT v FROM Version v")
+    , @NamedQuery(name = "Version.findById", query = "SELECT v FROM Version v WHERE v.id = :id")
+    , @NamedQuery(name = "Version.findByName", query = "SELECT v FROM Version v WHERE v.name = :name")
+    , @NamedQuery(name = "Version.findByNumber", query = "SELECT v FROM Version v WHERE v.number = :number")})
+public class Version implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,25 +44,15 @@ public class Parameter implements Serializable {
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @Size(max = 100)
-    @Column(name = "Definition")
-    private String definition;
-    @Column(name = "Date_modified")
-    @Temporal(TemporalType.DATE)
-    private Date datemodified;
-    @OneToMany(mappedBy = "parameterid")
+    @Column(name = "Number")
+    private Integer number;
+    @OneToMany(mappedBy = "versionid")
     private List<Data> dataList;
-    @JoinColumn(name = "Reference_id", referencedColumnName = "Id")
-    @ManyToOne
-    private Reference referenceid;
-    @JoinColumn(name = "Unit_id", referencedColumnName = "Id")
-    @ManyToOne
-    private Unit unitid;
 
-    public Parameter() {
+    public Version() {
     }
 
-    public Parameter(Integer id) {
+    public Version(Integer id) {
         this.id = id;
     }
 
@@ -88,20 +72,12 @@ public class Parameter implements Serializable {
         this.name = name;
     }
 
-    public String getDefinition() {
-        return definition;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setDefinition(String definition) {
-        this.definition = definition;
-    }
-
-    public Date getDatemodified() {
-        return datemodified;
-    }
-
-    public void setDatemodified(Date datemodified) {
-        this.datemodified = datemodified;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     @XmlTransient
@@ -111,22 +87,6 @@ public class Parameter implements Serializable {
 
     public void setDataList(List<Data> dataList) {
         this.dataList = dataList;
-    }
-
-    public Reference getReferenceid() {
-        return referenceid;
-    }
-
-    public void setReferenceid(Reference referenceid) {
-        this.referenceid = referenceid;
-    }
-
-    public Unit getUnitid() {
-        return unitid;
-    }
-
-    public void setUnitid(Unit unitid) {
-        this.unitid = unitid;
     }
 
     @Override
@@ -139,10 +99,10 @@ public class Parameter implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parameter)) {
+        if (!(object instanceof Version)) {
             return false;
         }
-        Parameter other = (Parameter) object;
+        Version other = (Version) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -151,7 +111,7 @@ public class Parameter implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.param_list.entity.Parameter[ id=" + id + " ]";
+        return "heps.db.param_list.entity.Version[ id=" + id + " ]";
     }
     
 }

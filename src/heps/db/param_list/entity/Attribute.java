@@ -6,22 +6,24 @@
 package heps.db.param_list.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "attribute")
@@ -34,13 +36,15 @@ public class Attribute implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
-    private Collection<Data> dataCollection;
+    @OneToMany(mappedBy = "attributeid")
+    private List<Data> dataList;
 
     public Attribute() {
     }
@@ -66,12 +70,12 @@ public class Attribute implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Data> getDataCollection() {
-        return dataCollection;
+    public List<Data> getDataList() {
+        return dataList;
     }
 
-    public void setDataCollection(Collection<Data> dataCollection) {
-        this.dataCollection = dataCollection;
+    public void setDataList(List<Data> dataList) {
+        this.dataList = dataList;
     }
 
     @Override
