@@ -1,80 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
     <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>NewServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UnitServlet</servlet-name>
-        <servlet-class>UnitServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DataServlet</servlet-name>
-        <servlet-class>DataServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>NewServlet1</servlet-name>
-        <servlet-class>NewServlet1</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListAllServlet</servlet-name>
-        <servlet-class>ListAllServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListAllServlet1</servlet-name>
-        <servlet-class>ListAllServlet1</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>FileImportServlet</servlet-name>
-        <servlet-class>FileImportServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DbExportFileServlet</servlet-name>
-        <servlet-class>DbExportFileServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>NewServlet4</servlet-name>
-        <servlet-class>NewServlet4</servlet-class>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UnitServlet</servlet-name>
-        <url-pattern>/UnitServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DataServlet</servlet-name>
-        <url-pattern>/DataServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewServlet1</servlet-name>
-        <url-pattern>/NewServlet1</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListAllServlet</servlet-name>
-        <url-pattern>/ListAllServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListAllServlet1</servlet-name>
-        <url-pattern>/ListAllServlet1</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FileImportServlet</servlet-name>
-        <url-pattern>/FileImportServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DbExportFileServlet</servlet-name>
-        <url-pattern>/DbExportFileServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewServlet4</servlet-name>
-        <url-pattern>/NewServlet4</url-pattern>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
 </web-app>

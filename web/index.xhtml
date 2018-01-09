@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:dataTable var="data" value="#{dataMB.dataDispList}">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="System"/>
+                </f:facet>
+                <h:outputText value="#{data.system}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Subsystem"/>
+                </f:facet>
+                <h:outputText value="#{data.subsystem}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Device"/>
+                </f:facet>
+                <h:outputText value="#{data.device}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Parameter Name"/>
+                </f:facet>
+                <h:outputText value="#{data.parameterName}"/>               
+            </p:column>
+              <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Attribute"/>
+                </f:facet>
+                  <h:outputText value="#{data.attibute}"/>               
+            </p:column>
+              <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Unit"/>
+                </f:facet>
+                  <h:outputText value="#{data.unit}"/>               
+            </p:column>
+              <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Data"/>
+                </f:facet>
+                  <h:outputText value="#{data.value}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Change Date"/>
+                </f:facet>
+                <h:outputText value="#{data.changeDate}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Definition"/>
+                </f:facet>
+                <h:outputText value="#{data.definition}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Reference Title"/>
+                </f:facet>
+                <h:outputText value="#{data.referenceTitle}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Reference Author"/>
+                </f:facet>
+                <h:outputText value="#{data.referenceAuthor}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Reference Publication"/>
+                </f:facet>
+                <h:outputText value="#{data.referencePublication}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Reference URL"/>
+                </f:facet>
+                <h:outputText value="#{data.referenceURL}"/>               
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Keyword"/>
+                </f:facet>
+                <h:outputText value="#{data.keyword}"/>               
+            </p:column>
+        </p:dataTable>
+    </h:body>
+</html>
+
