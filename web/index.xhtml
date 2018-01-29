@@ -8,38 +8,50 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <p:dataTable var="data" value="#{dataMB.dataDispList}">
-            <p:column>
+        <h:form>
+        <p:dataTable id="datas" var="data" value="#{dataMB.dataDispList}" paginator="true" rows="20" sortMode="multiple" >
+            <f:facet name="header">
+                <h:outputText value=" List of Parameter Values" style="font-size: 24px;color:royalblue"/>  
+               <p:commandButton id="toggler" type="button" value="Choose Columns to View" style="float:left;color: blueviolet" icon="ui-icon-calculator" />
+                <p:columnToggler datasource="datas" trigger="toggler"/>
+            </f:facet>             
+            <p:column visible="false" >
+                <f:facet name="header">
+                    <h:outputText value="Id"/>
+                </f:facet>
+                  <h:outputText value="#{data.id}"/>               
+            </p:column>
+            <p:column sortBy="#{data.system}" filterBy="#{data.system}" filterMatchMode="contains">
                 <f:facet name="header">
                     <h:outputText value="System"/>
                 </f:facet>
                 <h:outputText value="#{data.system}"/>
             </p:column>
-            <p:column>
+            <p:column  sortBy="#{data.subsystem}" filterBy="#{data.subsystem}"  filterMatchMode="contains">
                 <f:facet name="header">
                     <h:outputText value="Subsystem"/>
                 </f:facet>
                 <h:outputText value="#{data.subsystem}"/>
             </p:column>
-            <p:column>
+            <p:column filterBy="#{data.device}"  filterMatchMode="contains">
                 <f:facet name="header">
-                    <h:outputText value="Device"/>
+                    <h:outputText value="Device Type"/>
                 </f:facet>
                 <h:outputText value="#{data.device}"/>
             </p:column>
-            <p:column>
+            <p:column >
                 <f:facet name="header">
                     <h:outputText value="Parameter Name"/>
                 </f:facet>
                 <h:outputText value="#{data.parameterName}"/>               
             </p:column>
-              <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Attribute"/>
                 </f:facet>
                   <h:outputText value="#{data.attibute}"/>               
             </p:column>
-              <p:column>
+            <p:column >
                 <f:facet name="header">
                     <h:outputText value="Unit"/>
                 </f:facet>
@@ -47,53 +59,56 @@
             </p:column>
               <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Data"/>
+                    <h:outputText value="Value"/>
                 </f:facet>
                   <h:outputText value="#{data.value}"/>               
             </p:column>
-            <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Change Date"/>
                 </f:facet>
-                <h:outputText value="#{data.changeDate}"/>               
+                <h:outputText value="#{data.changeDate}"> 
+                    <f:convertDateTime timeZone="GMT+8" pattern="yyyy/MM/dd" locale="zh"/>
+                </h:outputText>
             </p:column>
-            <p:column>
+            <p:column visible="false">
                 <f:facet name="header">
                     <h:outputText value="Definition"/>
                 </f:facet>
                 <h:outputText value="#{data.definition}"/>               
             </p:column>
-            <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Reference Title"/>
                 </f:facet>
                 <h:outputText value="#{data.referenceTitle}"/>               
             </p:column>
-            <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Reference Author"/>
                 </f:facet>
                 <h:outputText value="#{data.referenceAuthor}"/>               
             </p:column>
-            <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Reference Publication"/>
                 </f:facet>
                 <h:outputText value="#{data.referencePublication}"/>               
             </p:column>
-            <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Reference URL"/>
                 </f:facet>
                 <h:outputText value="#{data.referenceURL}"/>               
             </p:column>
-            <p:column>
+            <p:column visible="false" >
                 <f:facet name="header">
                     <h:outputText value="Keyword"/>
                 </f:facet>
                 <h:outputText value="#{data.keyword}"/>               
             </p:column>
         </p:dataTable>
+        </h:form>
     </h:body>
 </html>
 
