@@ -20,6 +20,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import heps.db.param_list.ejb.DataFacade;
+import java.lang.Class;
 
 /**
  *
@@ -36,7 +37,7 @@ public class DataDispFacade {
 
     public List<DataDisp> getDataDispList() {
         Query q;
-        q = em.createNamedQuery("Data.findAll");
+        q = em.createNamedQuery("Data.findAll",Data.class);
         List dataList = q.getResultList();
         List<DataDisp> dispList = new ArrayList();
        // System.out.println("++++"+dataList.size());
@@ -45,9 +46,10 @@ public class DataDispFacade {
         } else {
             Iterator<Data> it = dataList.iterator();
             while (it.hasNext()) {
-                Object object=it.next();
+                Data data=it.next();
+              //  Object object=it.next();
                // System.out.println("*********"+object);
-                Data data = new DataFacade().setData(object);  
+              //  Data data = new DataFacade().setData(object);  
               //  System.out.println("---------"+data.getClass().getName());
                 DataDisp dp = new DataDisp();              
                 if (data.getSystemid() != null) {

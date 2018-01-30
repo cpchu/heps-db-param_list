@@ -55,13 +55,13 @@ public class DataFacade {
         em.getTransaction().commit();
     }
 
-    public Data setData(Object object) {
+  /*  public Data setData(Object object) {
         Data data = new Data();
         if (object.getClass().getName().equals("heps.db.param_list.entity.Data") ) {
             data =(Data) object.getClass().cast(object);
             System.out.println("!!!!!!!!!!!!!"+data);
         }
         return data;
-    }
+    }*/
 
 }
