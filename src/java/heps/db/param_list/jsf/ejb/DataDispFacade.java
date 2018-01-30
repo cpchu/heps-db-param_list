@@ -37,7 +37,7 @@ public class DataDispFacade {
 
     public List<DataDisp> getDataDispList() {
         Query q;
-        q = em.createNamedQuery("Data.findAll",Data.class);
+        q = em.createNamedQuery("Data.findAll");
         List dataList = q.getResultList();
         List<DataDisp> dispList = new ArrayList();
        // System.out.println("++++"+dataList.size());
@@ -47,9 +47,9 @@ public class DataDispFacade {
             Iterator<Data> it = dataList.iterator();
             while (it.hasNext()) {
                 Data data=it.next();
-              //  Object object=it.next();
+               Object object=it.next();
                // System.out.println("*********"+object);
-              //  Data data = new DataFacade().setData(object);  
+               Data data = new DataFacade().setData(object);  
               //  System.out.println("---------"+data.getClass().getName());
                 DataDisp dp = new DataDisp();              
                 if (data.getSystemid() != null) {
